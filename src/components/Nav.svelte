@@ -94,7 +94,7 @@
     <ul>
         <li>
             <a
-                rel="prefetch"
+                rel="{process.env.API_LESS ? 'external' : 'prefetch'}"
                 aria-current="{segment === undefined ? 'page' : undefined}"
                 href="."
                 on:click="{handleClick}"
@@ -108,7 +108,7 @@
             {#each categories as category}
                 <li class="{segment === category ? 'category-sticky' : undefined}">
                     <a
-                        rel="prefetch"
+                        rel="{process.env.API_LESS ? 'external' : 'prefetch'}"
                         aria-current="{segment === category ? 'page' : undefined}"
                         href="{category}"
                         on:click="{handleClick}"

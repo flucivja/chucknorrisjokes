@@ -1,3 +1,4 @@
+import dotenv from "dotenv";
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import commonjs from '@rollup/plugin-commonjs';
@@ -8,9 +9,12 @@ import postcss from 'rollup-plugin-postcss';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
 
+dotenv.config();
+
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
 const legacy = !!process.env.SAPPER_LEGACY_BUILD;
+const API_LESS = process.env.API_LESS || false;
 
 const onwarn = (warning, onwarn) =>
     (warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) || onwarn(warning);
@@ -22,7 +26,8 @@ export default {
         plugins: [
             replace({
                 'process.browser': true,
-                'process.env.NODE_ENV': JSON.stringify(mode)
+                'process.env.NODE_ENV': JSON.stringify(mode),
+                'process.env.API_LESS': API_LESS
             }),
             svelte({
                 dev,
@@ -103,7 +108,8 @@ export default {
             resolve(),
             replace({
                 'process.browser': true,
-                'process.env.NODE_ENV': JSON.stringify(mode)
+                'process.env.NODE_ENV': JSON.stringify(mode),
+                'process.env.API_LESS': API_LESS
             }),
             commonjs(),
             !dev && terser()

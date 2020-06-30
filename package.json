@@ -39,6 +39,7 @@
     "@smui/linear-progress": "^1.0.0-beta.21",
     "@smui/tab-bar": "^1.0.0-beta.21",
     "@smui/tab": "^1.0.0-beta.21",
-    "node-sass": "^4.14.1"
+    "node-sass": "^4.14.1",
+    "dotenv": "^8.2.0"
   }
 }

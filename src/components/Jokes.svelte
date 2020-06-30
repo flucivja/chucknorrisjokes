@@ -42,12 +42,13 @@
     .image {
         display: block;
         text-align: center;
-        height: 200px
+        height: 200px;
     }
 
     img {
-        min-height: 100%;
-        width: 'auto';
+        height: 100%;
+        max-height: 100%;
+        width: auto;
     }
 </style>
 
@@ -70,7 +71,9 @@
                     <div class="categories">
                         Categories:
                         {#each joke.categories as category}
-                            <a rel="prefetch" href="{category}">{capitalize(category)}</a>
+                            <a rel="{process.env.API_LESS ? 'external' : 'prefetch'}" href="{category}">
+                                {capitalize(category)}
+                            </a>
                         {/each}
                     </div>
                 {/if}
